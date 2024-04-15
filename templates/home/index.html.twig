@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Aquao!{% endblock %}
+
+{% block body %}
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            flex-direction: column;
+        }
+
+        a {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #4199b4;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 50%;
+        }
+
+        a:hover {
+            background-color: #4199b4;
+            color: #fff;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #4199b4;
+            border-radius: 5px;
+        {% if principal is defined %}
+            display: block;
+        {% else %}
+            display: none;
+        {% endif %}
+        }
+    </style>
+
+    <div class="container">
+        <h1>Welcome to the Aquao RBE JWT POC</h1>
+
+        {% if isLog %}
+            <div>
+                <a href="{{ path('app_logout') }}">Logout</a>
+                <a href="{{ path('app_whoami') }}">Who am I ?</a>
+                <div id="result" >
+                    {% if principal is defined %}
+                        <p>Principal: {{ principal }}</p>
+                        <br>
+                        <p>sessionId: {{ sessionId }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <a href="{{ path('app_login') }}">Generate Token</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
